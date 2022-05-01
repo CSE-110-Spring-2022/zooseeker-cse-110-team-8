@@ -13,7 +13,7 @@ public class App {
         String goal = "elephant_odyssey";
 
         // 1. Load the graph...
-        Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON("sample_zoo_graph.json");
+        Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON("app/src/main/java/com/example/zooseeker/sample_zoo_graph.json");
         GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
 
         // 2. Load the information about our nodes and edges...
