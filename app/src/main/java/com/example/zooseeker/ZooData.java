@@ -101,7 +101,16 @@ public class ZooData {
 
 
     public static Map<String, ZooData.EdgeInfo> loadEdgeInfoJSON(String path) {
-        InputStream inputStream = App.class.getClassLoader().getResourceAsStream(path);
+        // InputStream inputStream = App.class.getClassLoader().getResourceAsStream(path);
+
+        File initialFile = new File(path);
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(initialFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         Reader reader = new InputStreamReader(inputStream);
 
         Gson gson = new Gson();
@@ -132,11 +141,19 @@ public class ZooData {
 
         // On Android, you would use context.getAssets().open(path) here like in Lab 5.
         // InputStream inputStream = App.class.getClassLoader().getResourceAsStream(path);
-        Context context = ApplicationProvider.getApplicationContext();
+//        Context context = ApplicationProvider.getApplicationContext();
+//        InputStream inputStream = null;
+//        try {
+//            inputStream = context.getAssets().open(path);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        File initialFile = new File(path);
         InputStream inputStream = null;
         try {
-            inputStream = context.getAssets().open(path);
-        } catch (IOException e) {
+            inputStream = new FileInputStream(initialFile);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 

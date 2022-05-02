@@ -13,12 +13,12 @@ public class App {
         String goal = "elephant_odyssey";
 
         // 1. Load the graph...
-        Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON("app/src/main/java/com/example/zooseeker/sample_zoo_graph.json");
+        Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON("app/src/main/assets/sample_zoo_graph.json");
         GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
 
         // 2. Load the information about our nodes and edges...
-        Map<String, ZooData.VertexInfo> vInfo = ZooData.loadVertexInfoJSON("sample_node_info.json");
-        Map<String, ZooData.EdgeInfo> eInfo = ZooData.loadEdgeInfoJSON("sample_edge_info.json");
+        Map<String, ZooData.VertexInfo> vInfo = ZooData.loadVertexInfoJSON("app/src/main/assets/sample_node_info.json");
+        Map<String, ZooData.EdgeInfo> eInfo = ZooData.loadEdgeInfoJSON("app/src/main/assets/sample_edge_info.json");
 
         System.out.printf("The shortest path from '%s' to '%s' is:\n", start, goal);
 
@@ -32,5 +32,7 @@ public class App {
                     vInfo.get(g.getEdgeTarget(e).toString()).name);
             i++;
         }
+
+        Search.displaySearchResult("mammal");
     }
 }
