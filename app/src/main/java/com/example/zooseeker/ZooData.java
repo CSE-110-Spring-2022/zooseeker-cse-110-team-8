@@ -1,5 +1,6 @@
 package com.example.zooseeker;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -72,9 +73,9 @@ public class ZooData {
 //        Reader reader = new InputStreamReader(inputStream);
 
         File initialFile = new File(path);
-        InputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream(initialFile);
+            InputStream inputStream = null;
+            try {
+                inputStream = new FileInputStream(initialFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

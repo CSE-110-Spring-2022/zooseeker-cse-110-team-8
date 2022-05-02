@@ -1,11 +1,15 @@
 package com.example.zooseeker;
 
+import android.app.Activity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Search {
+public class Search extends Activity {
+
+
     public static void displaySearchResult(String label) {
         // 2. Load the information about our nodes and edges...
         Map<String, ZooData.VertexInfo> vInfo = ZooData.loadVertexInfoJSON("app/src/main/assets/sample_node_info.json");

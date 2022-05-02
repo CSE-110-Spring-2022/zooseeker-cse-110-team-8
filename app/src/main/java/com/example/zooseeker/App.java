@@ -11,6 +11,7 @@ public class App {
         // "source" and "sink" are graph terms for the start and end
         String start = "entrance_exit_gate";
         String goal = "elephant_odyssey";
+        String pa= "app/src/main/assets/sample_zoo_graph.json";
 
         // 1. Load the graph...
         Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON("app/src/main/assets/sample_zoo_graph.json");
