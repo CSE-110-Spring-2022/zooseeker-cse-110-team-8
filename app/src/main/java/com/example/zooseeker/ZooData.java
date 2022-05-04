@@ -35,6 +35,16 @@ public class ZooData {
             @SerializedName("intersection") INTERSECTION
         }
 
+        @Override
+        public String toString() {
+            return "VertexInfo{" +
+                    "id='" + id + '\'' +
+                    ", kind=" + kind +
+                    ", name='" + name + '\'' +
+                    ", tags=" + tags +
+                    '}';
+        }
+
         public String id;
         public Kind kind;
         public String name;

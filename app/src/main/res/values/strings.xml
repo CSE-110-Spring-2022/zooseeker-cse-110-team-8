@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ZooSeeker</string>
+    <string name="plan" />
+    <string name="back" />
 </resources>
