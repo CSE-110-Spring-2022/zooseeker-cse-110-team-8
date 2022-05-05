@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".PlanActivity">
 
     <TextView
         android:id="@+id/Plan"
@@ -12,7 +13,7 @@
 
         android:minHeight="48dp"
         android:text="Current Plan"
-        android:textSize="24dp"
+        android:textSize="24sp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.434"
@@ -20,14 +21,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.045" />
-    />
 
     <Button
-        android:id="@string/back"
+        android:id="@+id/search_button"
         android:layout_width="119dp"
         android:layout_height="45dp"
-        android:onClick="onBackClicked"
-        android:text="back"
+        android:onClick="onSearchClicked"
+        android:text="@string/searchbar"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

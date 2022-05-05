@@ -35,6 +35,7 @@ public class ZooData {
             @SerializedName("intersection") INTERSECTION
         }
 
+
         @Override
         public String toString() {
             return "VertexInfo{" +
@@ -44,6 +45,7 @@ public class ZooData {
                     ", tags=" + tags +
                     '}';
         }
+
 
         public String id;
         public Kind kind;
@@ -78,15 +80,11 @@ public class ZooData {
 //        return indexedZooData;
 //    }
 
-    public static Map<String, ZooData.VertexInfo> loadVertexInfoJSON(String path) {
-//        InputStream inputStream = App.class.getClassLoader().getResourceAsStream(path);
-//        Reader reader = new InputStreamReader(inputStream);
-
-        File initialFile = new File(path);
-            InputStream inputStream = null;
-            try {
-                inputStream = new FileInputStream(initialFile);
-        } catch (FileNotFoundException e) {
+    public static Map<String, ZooData.VertexInfo> loadVertexInfoJSON(Context context, String path) {
+        InputStream inputStream = null;
+        try {
+            inputStream = context.getAssets().open(path);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
