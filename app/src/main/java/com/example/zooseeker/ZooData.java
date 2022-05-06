@@ -28,8 +28,8 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
 import org.jgrapht.nio.json.JSONImporter;
 
-@Entity(tableName = "search_result")
 public class ZooData {
+    @Entity(tableName = "search_result")
     public static class VertexInfo {
         public static enum Kind {
             // The SerializedName annotation tells GSON how to convert
@@ -45,12 +45,12 @@ public class ZooData {
         @NonNull
         public String name;
         public Kind kind;
-        public List<String> tags;
+        public TagList tagList;
 
-        VertexInfo(@NonNull String name, Kind kind, List<String> tags) {
+        VertexInfo(@NonNull String name, Kind kind, TagList tagList) {
             this.name = name;
             this.kind = kind;
-            this.tags = tags;
+            this.tagList = tagList;
         }
 
         @Override
@@ -59,7 +59,7 @@ public class ZooData {
                     "id='" + id + '\'' +
                     ", kind=" + kind +
                     ", name='" + name + '\'' +
-                    ", tags=" + tags +
+                    ", tags=" + tagList.getTagList() +
                     '}';
         }
     }

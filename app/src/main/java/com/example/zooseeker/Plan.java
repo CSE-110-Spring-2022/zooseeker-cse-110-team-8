@@ -7,18 +7,24 @@ import java.util.List;
 public class Plan {
     public List<ZooData.VertexInfo> plan;
 
-    public Plan(ZooData.VertexInfo exhibit) {
+    public Plan(List<ZooData.VertexInfo> exhibits) {
         plan = new ArrayList<ZooData.VertexInfo>();
-        plan.add(exhibit);
+        plan = exhibits;
+    }
+
+    public List<ZooData.VertexInfo> getPlan() {
+        return plan;
     }
 
     public Plan() {
         plan = Collections.emptyList();
     }
 
-    public void add(ZooData.VertexInfo exhibit){
+    public void addPlan(ZooData.VertexInfo exhibit){
         plan.add(exhibit);
     }
+
+    public void setPlan(List<ZooData.VertexInfo> exhibits) {plan = exhibits;}
 
     public void display() {
         for (int i = 0; i < plan.size(); i++) {
