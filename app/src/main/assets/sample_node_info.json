@@ -1,6 +1,5 @@
 [
   {
-    "id": "entrance_exit_gate",
     "kind": "gate",
     "name": "Entrance and Exit Gate",
     "tags": [
@@ -13,13 +12,11 @@
     ]
   },
   {
-    "id": "entrance_plaza",
     "kind": "intersection",
     "name": "Entrance Plaza",
     "tags": []
   },
   {
-    "id": "gorillas",
     "kind": "exhibit",
     "name": "Gorillas",
     "tags": [
@@ -30,7 +27,6 @@
     ]
   },
   {
-    "id": "gators",
     "kind": "exhibit",
     "name": "Alligators",
     "tags": [
@@ -40,7 +36,6 @@
     ]
   },
   {
-    "id": "lions",
     "kind": "exhibit",
     "name": "Lions",
     "tags": [
@@ -51,7 +46,6 @@
     ]
   },
   {
-    "id": "elephant_odyssey",
     "kind": "exhibit",
     "name": "Elephant Odyssey",
     "tags": [
@@ -61,7 +55,6 @@
     ]
   },
   {
-    "id": "arctic_foxes",
     "kind": "exhibit",
     "name": "Arctic Foxes",
     "tags": [

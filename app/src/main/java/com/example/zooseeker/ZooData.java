@@ -3,6 +3,9 @@ package com.example.zooseeker;
 import android.app.Activity;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import androidx.test.core.app.ApplicationProvider;
 
 import java.io.File;
@@ -25,6 +28,7 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
 import org.jgrapht.nio.json.JSONImporter;
 
+@Entity(tableName = "search_result")
 public class ZooData {
     public static class VertexInfo {
         public static enum Kind {
@@ -35,12 +39,19 @@ public class ZooData {
             @SerializedName("intersection") INTERSECTION
         }
 
-        VertexInfo(Kind kind, String name, List<String> tags) {
-            this.kind = kind;
+        @PrimaryKey(autoGenerate = true)
+        public long id;
+
+        @NonNull
+        public String name;
+        public Kind kind;
+        public List<String> tags;
+
+        VertexInfo(@NonNull String name, Kind kind, List<String> tags) {
             this.name = name;
+            this.kind = kind;
             this.tags = tags;
         }
-
 
         @Override
         public String toString() {
@@ -51,12 +62,6 @@ public class ZooData {
                     ", tags=" + tags +
                     '}';
         }
-
-
-        public String id;
-        public Kind kind;
-        public String name;
-        public List<String> tags;
     }
 
     public static class EdgeInfo {
@@ -107,9 +112,10 @@ public class ZooData {
         //   indexedZooData[datum.id] = datum;
         // }
         //
-        Map<String, ZooData.VertexInfo> indexedZooData = zooData
-                .stream()
-                .collect(Collectors.toMap(v -> v.id, datum -> datum));
+
+        //Map<String, ZooData.VertexInfo> indexedZooData = zooData
+        //        .stream()
+         //       .collect(Collectors.toMap(v -> String.valueOf(v.id), datum -> datum));
 
         return zooData;
     }
