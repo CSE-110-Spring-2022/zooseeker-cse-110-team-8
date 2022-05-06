@@ -1,4 +1,4 @@
-package com.example.zooseeker;
+/*package com.example.zooseeker;
 
 import android.app.Activity;
 import android.content.Context;
@@ -38,4 +38,4 @@ public class Search extends Activity {
         return results;
     }
 
-}
+}*/

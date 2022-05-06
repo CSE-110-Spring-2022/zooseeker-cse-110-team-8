@@ -35,6 +35,12 @@ public class ZooData {
             @SerializedName("intersection") INTERSECTION
         }
 
+        VertexInfo(Kind kind, String name, List<String> tags) {
+            this.kind = kind;
+            this.name = name;
+            this.tags = tags;
+        }
+
 
         @Override
         public String toString() {
@@ -80,7 +86,7 @@ public class ZooData {
 //        return indexedZooData;
 //    }
 
-    public static Map<String, ZooData.VertexInfo> loadVertexInfoJSON(Context context, String path) {
+    public static List<ZooData.VertexInfo> loadVertexInfoJSON(Context context, String path) {
         InputStream inputStream = null;
         try {
             inputStream = context.getAssets().open(path);
@@ -105,7 +111,7 @@ public class ZooData {
                 .stream()
                 .collect(Collectors.toMap(v -> v.id, datum -> datum));
 
-        return indexedZooData;
+        return zooData;
     }
 
 

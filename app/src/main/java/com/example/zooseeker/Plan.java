@@ -1,6 +1,7 @@
 package com.example.zooseeker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Plan {
@@ -9,6 +10,10 @@ public class Plan {
     public Plan(ZooData.VertexInfo exhibit) {
         plan = new ArrayList<ZooData.VertexInfo>();
         plan.add(exhibit);
+    }
+
+    public Plan() {
+        plan = Collections.emptyList();
     }
 
     public void add(ZooData.VertexInfo exhibit){
