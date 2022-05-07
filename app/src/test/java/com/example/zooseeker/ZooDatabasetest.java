@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,8 +40,8 @@ public class ZooDatabasetest {
 
     @Test
     public void testInsert() {
-        List<String> tags1 = Collections.emptyList();
-        List<String> tags2 = Collections.emptyList();
+        List<String> tags1 = new ArrayList<>();
+        List<String> tags2 = new ArrayList<>();
         tags1.add("penguin");
         tags1.add("bird");
         tags2.add("otter");
@@ -57,7 +58,7 @@ public class ZooDatabasetest {
     }
     @Test
     public void testGet() {
-        List<String> tags1 = Collections.emptyList();
+        List<String> tags1 = new ArrayList<>();
         tags1.add("penguin");
         tags1.add("bird");
         TagList tagList1 = new TagList(tags1);
@@ -73,7 +74,7 @@ public class ZooDatabasetest {
     }
     @Test
     public void testUpdate() {
-        List<String> tags1 = Collections.emptyList();
+        List<String> tags1 = new ArrayList<>();
         tags1.add("penguin");
         tags1.add("bird");
         ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
@@ -91,7 +92,7 @@ public class ZooDatabasetest {
 
     @Test
     public void testDelete() {
-        List<String> tags1 = Collections.emptyList();
+        List<String> tags1 = new ArrayList<>();
         tags1.add("penguin");
         tags1.add("bird");
         ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;

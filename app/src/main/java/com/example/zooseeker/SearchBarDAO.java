@@ -11,11 +11,8 @@ public interface SearchBarDAO {
     @Insert
     long insert(ZooData.VertexInfo searchResult);
 
-    @Query("SELECT * FROM 'search_result' WHERE 'id'=:id")
+    @Query("SELECT * FROM `search_result` WHERE `id`=:id")
     ZooData.VertexInfo get(long id);
-
-    @Query("SELECT * FROM 'search_result' ORDER BY 'order'")
-    ZooData.VertexInfo getAll();
 
     @Update
     int update(ZooData.VertexInfo searchResult);

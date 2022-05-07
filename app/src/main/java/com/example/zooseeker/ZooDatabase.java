@@ -9,4 +9,6 @@ import androidx.room.TypeConverters;
 @TypeConverters({LanguageConverter.class})
 public abstract class ZooDatabase extends RoomDatabase {
     public com.example.zooseeker.SearchBarDAO SearchBarDAO;
+
+    public abstract SearchBarDAO SearchBarDAO();
 }

@@ -4,13 +4,14 @@ import android.nfc.Tag;
 
 import androidx.room.TypeConverter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class LanguageConverter {
     @TypeConverter
     public TagList storedStringToLanguages(String tag) {
-        List<String> langs = Arrays.asList(tag.split("\\s*,\\s*"));
+        List<String> langs = new ArrayList(Arrays.asList(tag.split("\\s*,\\s*")));
         return new TagList(langs);
     }
 
