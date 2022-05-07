@@ -16,7 +16,7 @@ public class LanguageConverter {
     }
 
     @TypeConverter
-    public String languagesToStoredString(TagList tags) {
+    public static String languagesToStoredString(TagList tags) {
         String tag = "";
         for (String lang : tags.getTagList())
             tag += lang + ",";

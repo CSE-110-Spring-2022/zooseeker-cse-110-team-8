@@ -16,5 +16,4 @@ public class TagList {
     public void setTagList(List<String> tagList) {
         this.tagList = tagList;
     }
-
 }
