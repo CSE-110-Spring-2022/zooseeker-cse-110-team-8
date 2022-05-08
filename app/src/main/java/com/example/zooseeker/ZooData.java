@@ -2,6 +2,8 @@ package com.example.zooseeker;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -30,6 +32,7 @@ import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
 import org.jgrapht.nio.json.JSONImporter;
 
 public class ZooData {
+
     @Entity(tableName = "search_result")
     public static class VertexInfo {
         public static enum Kind {

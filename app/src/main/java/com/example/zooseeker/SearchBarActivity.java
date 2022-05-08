@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,8 @@ public class SearchBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_bar);
 
-
+        SearchBarDAO searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
+        List<ZooData.VertexInfo> zooDataItems = searchBarDAO.getAll();
 
         adapter = new SearchBarAdapter();
         adapter.setHasStableIds(true);
@@ -34,7 +37,7 @@ public class SearchBarActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        adapter.setSearchResults(ZooData.loadVertexInfoJSON(this, "sample_node_info.json"));
+        adapter.setSearchResults(zooDataItems);
     }
 
     public void onPlanClicked(View view)
@@ -62,4 +65,9 @@ public class SearchBarActivity extends AppCompatActivity {
         });
         return super.onCreateOptionsMenu(menu);
     }
+
+    public void onAddClicked(View view) {
+
+    }
+
 }

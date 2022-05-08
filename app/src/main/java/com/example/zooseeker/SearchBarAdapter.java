@@ -3,6 +3,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import java.util.Locale;
 public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.ViewHolder> implements Filterable {
     private List<ZooData.VertexInfo> searchResults = Collections.emptyList();
     private List<ZooData.VertexInfo> searchResultsAll = Collections.emptyList();
+    private List<ZooData.VertexInfo> selected_result = Collections.emptyList();
 
 
     public void setSearchResults(List<ZooData.VertexInfo> newSearchResults) {
@@ -40,6 +42,30 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setZooData(searchResults.get(position));
+        if(holder.checkBox_complete.isChecked())
+        {
+            selected_result.add(searchResults.get(position));
+        }else{
+            selected_result.remove(searchResults.get(position));
+        }
+
+
+
+//        if(searchResults != null && searchResults.size() > 0){
+//            holder.checkBox_complete.setText(searchResults.get(position).name);
+//            if(holder.checkBox_complete.isChecked())
+//            {
+//                selected_result.add(searchResults.get(position));
+//            }else{
+//                selected_result.remove(searchResults.get(position));
+//            }
+//            selectedListener.onSelectedChange(selected_result);
+//        }
+    }
+
+    //get all items selected
+    public List<ZooData.VertexInfo> getAll(){
+        return selected_result;
     }
 
     @Override
@@ -85,12 +111,14 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
         private TextView textViewTags;
+        private CheckBox checkBox_complete;
         private ZooData.VertexInfo zooData;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.textViewTitle = itemView.findViewById(R.id.search_result_title);
             this.textViewTags = itemView.findViewById(R.id.search_view_tags);
+            this.checkBox_complete = itemView.findViewById(R.id.check_box);
         }
 
         public ZooData.VertexInfo getZooData() {return zooData;}
@@ -101,7 +129,7 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
             this.textViewTags.
                     setText(zooData.tags.toString().
                             substring(1, zooData.tags.toString().length()-1));
-
         }
+
     }
 }
