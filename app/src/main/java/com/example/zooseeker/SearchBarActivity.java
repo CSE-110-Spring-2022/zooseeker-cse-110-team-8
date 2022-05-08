@@ -30,7 +30,7 @@ public class SearchBarActivity extends AppCompatActivity {
         adapter = new SearchBarAdapter();
         adapter.setHasStableIds(true);
 
-        recyclerView = findViewById(R.id.search_results);
+        recyclerView = findViewById(R.id.search_results_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 

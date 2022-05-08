@@ -60,7 +60,8 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
             }else{
                 for(ZooData.VertexInfo exhibit: searchResultsAll)
                 {
-                    if(exhibit.name.toLowerCase().contains(charSequence.toString().toLowerCase())){
+                    if(exhibit.name.toLowerCase().contains(charSequence.toString().toLowerCase())
+                    ||exhibit.tags.toString().toLowerCase().contains(charSequence.toString().toLowerCase())){
                         filteredList.add(exhibit);
                     }
                 }
@@ -82,19 +83,25 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
     };
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        private TextView textViewTitle;
+        private TextView textViewTags;
         private ZooData.VertexInfo zooData;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.textView = itemView.findViewById(R.id.search_result_text);
+            this.textViewTitle = itemView.findViewById(R.id.search_result_title);
+            this.textViewTags = itemView.findViewById(R.id.search_view_tags);
         }
 
         public ZooData.VertexInfo getZooData() {return zooData;}
 
         public void setZooData(ZooData.VertexInfo zooData) {
             this.zooData = zooData;
-            this.textView.setText(zooData.name);
+            this.textViewTitle.setText(zooData.name);
+            this.textViewTags.
+                    setText(zooData.tags.toString().
+                            substring(1, zooData.tags.toString().length()-1));
+
         }
     }
 }

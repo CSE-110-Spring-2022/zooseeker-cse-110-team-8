@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.List;
+
 @Dao
 public interface SearchBarDAO {
     @Insert
@@ -13,6 +15,9 @@ public interface SearchBarDAO {
 
     @Query("SELECT * FROM `search_result` WHERE `id`=:id")
     ZooData.VertexInfo get(long id);
+
+    @Query("SELECT * FROM `search_result` ORDER BY `id`" )
+    List<ZooData.VertexInfo> getAll();
 
     @Update
     int update(ZooData.VertexInfo searchResult);

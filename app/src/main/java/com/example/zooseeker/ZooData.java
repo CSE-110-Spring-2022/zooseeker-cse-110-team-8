@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -45,12 +46,12 @@ public class ZooData {
         @NonNull
         public String name;
         public Kind kind;
-        public TagList tagList;
+        public List<String> tags;
 
-        VertexInfo(@NonNull String name, Kind kind, TagList tagList) {
+        VertexInfo(@NonNull String name, Kind kind, List<String> tags) {
             this.name = name;
             this.kind = kind;
-            this.tagList = tagList;
+            this.tags = tags;
         }
 
         @Override
@@ -59,7 +60,7 @@ public class ZooData {
                     "id='" + id + '\'' +
                     ", kind=" + kind +
                     ", name='" + name + '\'' +
-                    ", tags=" + tagList.getTagList() +
+                    ", tags=" + tags +
                     '}';
         }
     }
@@ -104,6 +105,8 @@ public class ZooData {
         Gson gson = new Gson();
         Type type = new TypeToken<List<ZooData.VertexInfo>>(){}.getType();
         List<ZooData.VertexInfo> zooData = gson.fromJson(reader, type);
+
+//        List<ZooData.VertexInfo> indexedZooData = new ArrayList<>(zooData);
 
         // This code is equivalent to:
         //

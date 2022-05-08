@@ -1,4 +1,25 @@
 package com.example.zooseeker;
+
+
+//import static org.junit.Assert.assertEquals;
+//
+//import android.content.Context;
+//
+//import androidx.test.ext.junit.runners.AndroidJUnit4;
+//import androidx.test.platform.app.InstrumentationRegistry;
+//
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//
+//@RunWith(AndroidJUnit4.class)
+//public class ZooDatabasetest{
+//    @Test
+//    public void useAppContext() {
+//        // Context of the app under test.
+//        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+//        assertEquals("com.example.zooseeker", appContext.getPackageName());
+//    }
+//}
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -35,22 +56,21 @@ public class ZooDatabasetest {
         db = Room.inMemoryDatabaseBuilder(context, ZooDatabase.class)
                 .allowMainThreadQueries()
                 .build();
-        dao = db.SearchBarDAO;
+        dao = db.SearchBarDAO();
     }
 
     @Test
     public void testInsert() {
+        ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
         List<String> tags1 = new ArrayList<>();
         List<String> tags2 = new ArrayList<>();
         tags1.add("penguin");
         tags1.add("bird");
         tags2.add("otter");
         tags2.add("mammal");
-        TagList tagList1 = new TagList(tags1);
-        TagList tagList2 = new TagList(tags2);
-        ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
-        ZooData.VertexInfo item1 = new ZooData.VertexInfo("penguins", kind, tagList1);
-        ZooData.VertexInfo item2 = new ZooData.VertexInfo("otters", kind, tagList2);
+        ZooData.VertexInfo item1 = new ZooData.VertexInfo("penguins",kind,tags1);
+        ZooData.VertexInfo item2 = new ZooData.VertexInfo("otters", kind, tags2);
+        ZooData.VertexInfo item3 = new ZooData.VertexInfo("otters", kind, tags2);
 
         long id1 = dao.insert(item1);
         long id2 = dao.insert(item2);
@@ -61,16 +81,15 @@ public class ZooDatabasetest {
         List<String> tags1 = new ArrayList<>();
         tags1.add("penguin");
         tags1.add("bird");
-        TagList tagList1 = new TagList(tags1);
         ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
-        ZooData.VertexInfo insertedData = new ZooData.VertexInfo("penguins", kind, tagList1);
+        ZooData.VertexInfo insertedData = new ZooData.VertexInfo("penguins", kind, tags1);
         long id = dao.insert(insertedData);
 
         ZooData.VertexInfo item = dao.get(id);
         assertEquals(id, item.id);
         assertEquals(insertedData.name, item.name);
         assertEquals(insertedData.kind, item.kind);
-        assertEquals(insertedData.tagList.getTagList(), item.tagList.getTagList());
+        assertEquals(insertedData.tags, item.tags);
     }
     @Test
     public void testUpdate() {
@@ -79,7 +98,7 @@ public class ZooDatabasetest {
         tags1.add("bird");
         ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
         TagList tagList1 = new TagList(tags1);
-        ZooData.VertexInfo item = new ZooData.VertexInfo("penguins", kind, tagList1);
+        ZooData.VertexInfo item = new ZooData.VertexInfo("penguins", kind, tags1);
         long id = dao.insert(item);
         item = dao.get(id);
         item.name = "penguins";
@@ -97,7 +116,7 @@ public class ZooDatabasetest {
         tags1.add("bird");
         ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
         TagList tagList1 = new TagList(tags1);
-        ZooData.VertexInfo item = new ZooData.VertexInfo("penguins", kind, tagList1);
+        ZooData.VertexInfo item = new ZooData.VertexInfo("penguins", kind, tags1);
         long id = dao.insert(item);
         item = dao.get(id);
         int itemsDeleted = dao.delete(item);
