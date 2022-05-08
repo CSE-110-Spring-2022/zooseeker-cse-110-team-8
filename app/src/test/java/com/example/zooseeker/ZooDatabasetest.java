@@ -97,7 +97,6 @@ public class ZooDatabasetest {
         tags1.add("penguin");
         tags1.add("bird");
         ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
-        TagList tagList1 = new TagList(tags1);
         ZooData.VertexInfo item = new ZooData.VertexInfo("penguins", kind, tags1);
         long id = dao.insert(item);
         item = dao.get(id);
@@ -115,7 +114,6 @@ public class ZooDatabasetest {
         tags1.add("penguin");
         tags1.add("bird");
         ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
-        TagList tagList1 = new TagList(tags1);
         ZooData.VertexInfo item = new ZooData.VertexInfo("penguins", kind, tags1);
         long id = dao.insert(item);
         item = dao.get(id);
