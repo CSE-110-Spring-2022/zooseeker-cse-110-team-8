@@ -73,6 +73,7 @@ public class ZooData {
             @SerializedName("gate") GATE,
             @SerializedName("exhibit") EXHIBIT,
             @SerializedName("intersection") INTERSECTION
+            ////
         }
 
         @PrimaryKey(autoGenerate = true)
