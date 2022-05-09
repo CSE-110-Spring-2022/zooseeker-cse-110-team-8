@@ -2,6 +2,9 @@ package com.example.zooseeker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,9 +19,9 @@ import android.widget.Toast;
 
 import java.util.List;
 import java.util.Map;
-
 public class SearchBarActivity extends AppCompatActivity {
-
+    public static final String s_exhibit = "com.example.zooseeker.s_exhibit";
+    private ZooDataViewModel zooDataViewModel;
     public RecyclerView recyclerView;
     public SearchBarAdapter adapter;
 
@@ -26,6 +29,7 @@ public class SearchBarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_bar);
+
 
         SearchBarDAO searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
         List<ZooData.VertexInfo> zooDataItems = searchBarDAO.getAll();
@@ -38,11 +42,30 @@ public class SearchBarActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         adapter.setSearchResults(zooDataItems);
+
+//        zooDataViewModel = new ViewModelProvider(this).get(ZooDataViewModel.class);
+//        zooDataViewModel.getZooDataAll().observe(this, new Observer<List<ZooData.VertexInfo>>() {
+//            @Override
+//            public void onChanged(List<ZooData.VertexInfo> vertexInfos) {
+//                //update RecyclerView
+//               adapter.setSearchResults(vertexInfos);
+//            }
+//        });
+
     }
 
     public void onPlanClicked(View view)
     {
+
         Intent intent = new Intent(this, PlanActivity.class);
+        startActivity(intent);
+    }
+
+    private void saveExhibit(){
+
+        List<ZooData.VertexInfo> selected = adapter.getAll();
+        Intent intent = new Intent(this,PlanActivity.class);
+        intent.putExtra("selected", (Parcelable) selected);
         startActivity(intent);
     }
 
@@ -67,7 +90,9 @@ public class SearchBarActivity extends AppCompatActivity {
     }
 
     public void onAddClicked(View view) {
-
+        List<ZooData.VertexInfo> selected = adapter.getAll();
+        Intent intent = new Intent(this,PlanActivity.class);
+        intent.putExtra("selected", (Parcelable) selected);
+        startActivity(intent);
     }
-
 }

@@ -56,6 +56,8 @@ dependencies {
     def room_version = "2.4.2"
     def jgrapht_version = "1.5.0"
 
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "com.google.code.gson:gson:$gson_version"

@@ -23,11 +23,16 @@ public interface SearchBarDAO {
     @Query("SELECT * FROM `search_result` ORDER BY `id`" )
     List<ZooData.VertexInfo> getAll();
 
+    @Query("DELETE FROM `search_result`")
+    void deleteAllZooData();
+
     @Update
     int update(ZooData.VertexInfo searchResult);
 
     @Delete
     int delete(ZooData.VertexInfo searchResult);
+
+
 
     @Query("SELECT * FROM `search_result` ORDER BY `id`")
     LiveData<List<ZooData.VertexInfo>> getAllLive();

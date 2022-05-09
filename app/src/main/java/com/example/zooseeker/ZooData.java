@@ -34,7 +34,39 @@ import org.jgrapht.nio.json.JSONImporter;
 public class ZooData {
 
     @Entity(tableName = "search_result")
-    public static class VertexInfo {
+    public static class VertexInfo implements Parcelable{
+        protected VertexInfo(Parcel in) {
+            id = in.readLong();
+            name = in.readString();
+            kind = Kind.valueOf(in.readString());
+            tags = in.createStringArrayList();
+        }
+
+        public static final Creator<VertexInfo> CREATOR = new Creator<VertexInfo>() {
+            @Override
+            public VertexInfo createFromParcel(Parcel in) {
+                return new VertexInfo(in);
+            }
+
+            @Override
+            public VertexInfo[] newArray(int size) {
+                return new VertexInfo[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel parcel, int i) {
+            parcel.writeLong(id);
+            parcel.writeString(name);
+            parcel.writeString(kind.name());
+            parcel.writeStringList(tags);
+        }
+
         public static enum Kind {
             // The SerializedName annotation tells GSON how to convert
             // from the strings in our JSON to this Enum.
