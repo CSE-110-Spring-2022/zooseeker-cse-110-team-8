@@ -61,16 +61,9 @@ public class SearchBarActivity extends AppCompatActivity {
 
     public void onPlanClicked(View view)
     {
-
-        Intent intent = new Intent(this, PlanActivity.class);
-        startActivity(intent);
-    }
-
-    private void saveExhibit(){
-
         List<ZooData.VertexInfo> selected = adapter.getAll();
         Intent intent = new Intent(this,PlanActivity.class);
-        intent.putExtra("selected", (Parcelable) selected);
+        intent.putExtra("selected", (Serializable) selected);
         startActivity(intent);
     }
 
