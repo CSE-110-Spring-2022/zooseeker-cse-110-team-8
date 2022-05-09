@@ -130,14 +130,12 @@ public class ZooData {
     }
 
 
-    public static Map<String, ZooData.EdgeInfo> loadEdgeInfoJSON(String path) {
+    public static List<ZooData.EdgeInfo> loadEdgeInfoJSON(Context context, String path) {
         // InputStream inputStream = App.class.getClassLoader().getResourceAsStream(path);
-
-        File initialFile = new File(path);
         InputStream inputStream = null;
         try {
-            inputStream = new FileInputStream(initialFile);
-        } catch (FileNotFoundException e) {
+            inputStream = context.getAssets().open(path);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -147,11 +145,7 @@ public class ZooData {
         Type type = new TypeToken<List<ZooData.EdgeInfo>>(){}.getType();
         List<ZooData.EdgeInfo> zooData = gson.fromJson(reader, type);
 
-        Map<String, ZooData.EdgeInfo> indexedZooData = zooData
-                .stream()
-                .collect(Collectors.toMap(v -> v.id, datum -> datum));
-
-        return indexedZooData;
+        return zooData;
     }
 
     public static Graph<String, IdentifiedWeightedEdge> loadZooGraphJSON(String path) {
