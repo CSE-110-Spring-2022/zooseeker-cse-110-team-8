@@ -32,24 +32,8 @@ public class PlanActivity extends AppCompatActivity {
 
 
         Intent i = getIntent();
-        List<ZooData.VertexInfo> zooDataVertex = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
+      //  List<ZooData.VertexInfo> zooDataVertex = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
         List<ZooData.VertexInfo> selected_exhibits = (List<ZooData.VertexInfo>)i.getSerializableExtra("selected");
-        List<ZooData.EdgeInfo> zooDataEdge = ZooData.loadEdgeInfoJSON(this,"sample_edge_info.json");
-        zooDataEdge.toString();
-        Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON("sample_zoo_graph.json");
-        GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, selected_exhibits.get(1).name, selected_exhibits.get(3).name);
-//
-//        int i = 1;
-//        for (IdentifiedWeightedEdge e : path.getEdgeList()) {
-//            System.out.printf("  %d. Walk %.0f meters along %s from '%s' to '%s'.\n",
-//                    i,
-//                    g.getEdgeWeight(e),
-//                    zooDataEdge.get(e.getId()).street,
-//                 //   selected_exhibits.get(g.getEdgeSource(e).toString()).name,
-//                    //    selected_exhibits.get(g.getEdgeTarget(e).toString()).name);
-//            i++;
-//        }
-
         recyclerView = findViewById(R.id.search_results_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
