@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 public class SearchBarActivity extends AppCompatActivity {
@@ -92,7 +93,7 @@ public class SearchBarActivity extends AppCompatActivity {
     public void onAddClicked(View view) {
         List<ZooData.VertexInfo> selected = adapter.getAll();
         Intent intent = new Intent(this,PlanActivity.class);
-        intent.putExtra("selected", (Parcelable) selected);
+        intent.putExtra("selected", (Serializable) selected);
         startActivity(intent);
     }
 }

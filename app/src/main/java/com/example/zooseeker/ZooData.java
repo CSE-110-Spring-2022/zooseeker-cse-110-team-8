@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,38 +35,7 @@ import org.jgrapht.nio.json.JSONImporter;
 public class ZooData {
 
     @Entity(tableName = "search_result")
-    public static class VertexInfo implements Parcelable{
-        protected VertexInfo(Parcel in) {
-            id = in.readLong();
-            name = in.readString();
-            kind = Kind.valueOf(in.readString());
-            tags = in.createStringArrayList();
-        }
-
-        public static final Creator<VertexInfo> CREATOR = new Creator<VertexInfo>() {
-            @Override
-            public VertexInfo createFromParcel(Parcel in) {
-                return new VertexInfo(in);
-            }
-
-            @Override
-            public VertexInfo[] newArray(int size) {
-                return new VertexInfo[size];
-            }
-        };
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel parcel, int i) {
-            parcel.writeLong(id);
-            parcel.writeString(name);
-            parcel.writeString(kind.name());
-            parcel.writeStringList(tags);
-        }
+    public static class VertexInfo implements Serializable {
 
         public static enum Kind {
             // The SerializedName annotation tells GSON how to convert
@@ -73,7 +43,7 @@ public class ZooData {
             @SerializedName("gate") GATE,
             @SerializedName("exhibit") EXHIBIT,
             @SerializedName("intersection") INTERSECTION
-            ////
+
         }
 
         @PrimaryKey(autoGenerate = true)
