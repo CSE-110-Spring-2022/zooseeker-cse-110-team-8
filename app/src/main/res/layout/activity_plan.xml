@@ -16,24 +16,36 @@
         android:textSize="24sp"
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.045" />
+        app:layout_constraintVertical_bias="0.01" />
 
     <Button
         android:id="@+id/search_button"
-        android:layout_width="119dp"
-        android:layout_height="45dp"
+        android:layout_width="134dp"
+        android:layout_height="53dp"
         android:onClick="onSearchClicked"
         android:text="@string/searchbar"
 
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.989"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.795" />
+        app:layout_constraintVertical_bias="0.994" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_results_recyclerview"
+        android:layout_width="407dp"
+        android:layout_height="582dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.362"
+        tools:listitem="@layout/plan_rv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

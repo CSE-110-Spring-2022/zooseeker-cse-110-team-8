@@ -2,7 +2,12 @@ package com.example.zooseeker;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import androidx.test.core.app.ApplicationProvider;
 
 import java.io.File;
@@ -12,7 +17,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,15 +33,32 @@ import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
 import org.jgrapht.nio.json.JSONImporter;
 
 public class ZooData {
-    public static class VertexInfo {
+
+    @Entity(tableName = "search_result")
+    public static class VertexInfo implements Serializable {
+
         public static enum Kind {
             // The SerializedName annotation tells GSON how to convert
             // from the strings in our JSON to this Enum.
             @SerializedName("gate") GATE,
             @SerializedName("exhibit") EXHIBIT,
             @SerializedName("intersection") INTERSECTION
+
         }
 
+        @PrimaryKey(autoGenerate = true)
+        public long id;
+
+        @NonNull
+        public String name;
+        public Kind kind;
+        public List<String> tags;
+
+        VertexInfo(@NonNull String name, Kind kind, List<String> tags) {
+            this.name = name;
+            this.kind = kind;
+            this.tags = tags;
+        }
 
         @Override
         public String toString() {
@@ -45,12 +69,6 @@ public class ZooData {
                     ", tags=" + tags +
                     '}';
         }
-
-
-        public String id;
-        public Kind kind;
-        public String name;
-        public List<String> tags;
     }
 
     public static class EdgeInfo {
@@ -80,7 +98,7 @@ public class ZooData {
 //        return indexedZooData;
 //    }
 
-    public static Map<String, ZooData.VertexInfo> loadVertexInfoJSON(Context context, String path) {
+    public static List<ZooData.VertexInfo> loadVertexInfoJSON(Context context, String path) {
         InputStream inputStream = null;
         try {
             inputStream = context.getAssets().open(path);
@@ -94,6 +112,8 @@ public class ZooData {
         Type type = new TypeToken<List<ZooData.VertexInfo>>(){}.getType();
         List<ZooData.VertexInfo> zooData = gson.fromJson(reader, type);
 
+//        List<ZooData.VertexInfo> indexedZooData = new ArrayList<>(zooData);
+
         // This code is equivalent to:
         //
         // Map<String, ZooData.VertexInfo> indexedZooData = new HashMap();
@@ -101,22 +121,21 @@ public class ZooData {
         //   indexedZooData[datum.id] = datum;
         // }
         //
-        Map<String, ZooData.VertexInfo> indexedZooData = zooData
-                .stream()
-                .collect(Collectors.toMap(v -> v.id, datum -> datum));
 
-        return indexedZooData;
+        //Map<String, ZooData.VertexInfo> indexedZooData = zooData
+        //        .stream()
+         //       .collect(Collectors.toMap(v -> String.valueOf(v.id), datum -> datum));
+
+        return zooData;
     }
 
 
-    public static Map<String, ZooData.EdgeInfo> loadEdgeInfoJSON(String path) {
+    public static List<ZooData.EdgeInfo> loadEdgeInfoJSON(Context context, String path) {
         // InputStream inputStream = App.class.getClassLoader().getResourceAsStream(path);
-
-        File initialFile = new File(path);
         InputStream inputStream = null;
         try {
-            inputStream = new FileInputStream(initialFile);
-        } catch (FileNotFoundException e) {
+            inputStream = context.getAssets().open(path);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -126,11 +145,7 @@ public class ZooData {
         Type type = new TypeToken<List<ZooData.EdgeInfo>>(){}.getType();
         List<ZooData.EdgeInfo> zooData = gson.fromJson(reader, type);
 
-        Map<String, ZooData.EdgeInfo> indexedZooData = zooData
-                .stream()
-                .collect(Collectors.toMap(v -> v.id, datum -> datum));
-
-        return indexedZooData;
+        return zooData;
     }
 
     public static Graph<String, IdentifiedWeightedEdge> loadZooGraphJSON(String path) {
