@@ -18,6 +18,7 @@ import java.util.Map;
 
 public class PlanActivity extends AppCompatActivity {
     private ZooDataViewModel zooDataViewModel;
+    SearchBarDAO searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
     public RecyclerView recyclerView;
     public SearchBarAdapter adapter;
 
@@ -33,7 +34,8 @@ public class PlanActivity extends AppCompatActivity {
 
         Intent i = getIntent();
       //  List<ZooData.VertexInfo> zooDataVertex = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
-        List<ZooData.VertexInfo> selected_exhibits = (List<ZooData.VertexInfo>)i.getSerializableExtra("selected");
+    //    List<ZooData.VertexInfo> selected_exhibits = (List<ZooData.VertexInfo>)i.getSerializableExtra("selected");
+        List<ZooData.VertexInfo> selected_exhibits = searchBarDAO.getAll();
         recyclerView = findViewById(R.id.search_results_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

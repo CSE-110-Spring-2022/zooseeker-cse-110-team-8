@@ -62,5 +62,15 @@
       "fox",
       "mammal"
     ]
+  },
+  {
+    "kind": "exhibit",
+    "name": "Guanji",
+    "tags": [
+      "human",
+      "UCSD=",
+      "procrastinator",
+      "student"
+    ]
   }
 ]
