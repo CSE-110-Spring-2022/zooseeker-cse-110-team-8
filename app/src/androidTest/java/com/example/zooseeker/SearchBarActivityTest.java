@@ -45,7 +45,7 @@ public class SearchBarActivityTest{
                 .allowMainThreadQueries()
                 .build();
         ZooDatabase.injectTestDatabase(testDb);
-        List<ZooData.VertexInfo> todos = ZooData.loadVertexInfoJSON(context, "sample_node_info.json");
+        List<ZooData.VertexInfo> todos = ZooData.loadVertexInfoJSONList(context, "sample_node_info.json");
         searchBarDAO = testDb.SearchBarDAO();
         searchBarDAO.insertAll(todos);
     }
