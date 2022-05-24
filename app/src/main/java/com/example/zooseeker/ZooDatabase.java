@@ -46,7 +46,11 @@ public abstract class ZooDatabase extends RoomDatabase {
                         super.onCreate(db);
                         Executors.newSingleThreadExecutor().execute(()->{
                             List<ZooData.VertexInfo> items = ZooData
+<<<<<<< HEAD
                                     .loadVertexInfoJSON(context,"empty_node_info.json");
+=======
+                                    .loadVertexInfoJSONList(context,"sample_node_info.json");
+>>>>>>> c9f02c2db67c34e336031e298ab78fa1edd87469
                             getSingleton(context).SearchBarDAO().insertAll(items);
                         });
                     }

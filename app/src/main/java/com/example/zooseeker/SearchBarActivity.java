@@ -36,9 +36,16 @@ public class SearchBarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_bar);
 
 
+<<<<<<< HEAD
         searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
         List<ZooData.VertexInfo> plan = searchBarDAO.getAll();
         List<ZooData.VertexInfo> zooDataItemsNotInDatabase = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
+=======
+        SearchBarDAO searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
+        List<ZooData.VertexInfo> plan = searchBarDAO.getAll();
+        Map<String, ZooData.VertexInfo> zooDataItemsNotInDatabaseMap = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
+        List<ZooData.VertexInfo> zooDataItemsNotInDatabaseList = ZooData.loadVertexInfoJSONList(this,"sample_node_info.json");
+>>>>>>> c9f02c2db67c34e336031e298ab78fa1edd87469
         adapter = new SearchBarAdapter();
         adapter.setHasStableIds(true);
 
@@ -46,16 +53,47 @@ public class SearchBarActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+<<<<<<< HEAD
         adapter.setSearchResults(zooDataItemsNotInDatabase);
+=======
+        adapter.setSearchResults(zooDataItemsNotInDatabaseList);
+>>>>>>> c9f02c2db67c34e336031e298ab78fa1edd87469
 
-//        zooDataViewModel = new ViewModelProvider(this).get(ZooDataViewModel.class);
-//        zooDataViewModel.getZooDataAll().observe(this, new Observer<List<ZooData.VertexInfo>>() {
-//            @Override
-//            public void onChanged(List<ZooData.VertexInfo> vertexInfos) {
-//                //update RecyclerView
-//               adapter.setSearchResults(vertexInfos);
-//            }
-//        });
+/*
+        zooDataViewModel = new ViewModelProvider(this).get(ZooDataViewModel.class);
+        zooDataViewModel.getZooDataAll().observe(this, new Observer<List<ZooData.VertexInfo>>() {
+            @Override
+            public void onChanged(List<ZooData.VertexInfo> vertexInfos) {
+                //update RecyclerView
+               adapter.setSearchResults(vertexInfos);
+            }
+        });
+        String start = "entrance_exit_gate";
+        String goal = "elephant_odyssey";
+        String pa= "sample_zoo_graph.json";
+
+        1. Load the graph...
+        Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON("sample_zoo_graph.json");
+        GraphPath<String, IdentifiedWeightedEdge> currentpath = DijkstraShortestPath.findPathBetween(g, start, goal);
+        currentpath.getWeight();
+
+        2. Load the information about our nodes and edges...
+        Map<String, ZooData.VertexInfo> vInfoMap = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
+        Map<String, ZooData.VertexInfo> eInfoMap = ZooData.loadEdgeInfoJSON(this,"sample_edge_info.json");
+
+        System.out.printf("The shortest path from '%s' to '%s' is:\n", start, goal);
+
+        int i = 1;
+        for (IdentifiedWeightedEdge e : currentpath.getEdgeList()) {
+            System.out.printf("  %d. Walk %.0f meters along %s from '%s' to '%s'.\n",
+                    i,
+                      g.getEdgeWeight(e),
+                      eInfo.get(e.getId()).street,
+                      vInfo.get(g.getEdgeSource(e).toString()).name,
+                      vInfo.get(g.getEdgeTarget(e).toString()).name);
+            i++;
+        }
+*/
 
 //        String start = "entrance_exit_gate";
 //        String goal = "elephant_odyssey";
