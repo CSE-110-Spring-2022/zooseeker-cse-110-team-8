@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/check_box"
-            android:hint="[tags]"
+            android:hint=""
             android:layout_below="@+id/search_result_title"/>
     </RelativeLayout>
 

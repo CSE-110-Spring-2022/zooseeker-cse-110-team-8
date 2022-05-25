@@ -1,4 +1,5 @@
 package com.example.zooseeker;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,7 +45,6 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setZooData(searchResults.get(position));
-
     }
 
     //get all items selected
@@ -81,6 +81,7 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
             return filterResults;
         }
         //run on ui thread
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
               searchResults.clear();
@@ -123,9 +124,9 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
         public void setZooData(ZooData.VertexInfo zooData) {
             this.zooData = zooData;
             this.textViewTitle.setText(zooData.name);
-            this.textViewTags.
-                    setText(zooData.tags.toString().
-                            substring(1, zooData.tags.toString().length()-1));
+            this.textViewTags
+                    .setText(zooData.tags.toString()
+                            .substring(1, zooData.tags.toString().length()-1));
 
         }
 

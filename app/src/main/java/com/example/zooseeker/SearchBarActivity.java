@@ -30,6 +30,32 @@ public class SearchBarActivity extends AppCompatActivity {
         List<ZooData.VertexInfo> plan = searchBarDAO.getAll();
         Map<String, ZooData.VertexInfo> zooDataItemsNotInDatabaseMap = ZooData.loadVertexInfoJSON(this, "sample_vertex_info.json");
         List<ZooData.VertexInfo> zooDataItemsNotInDatabaseList = ZooData.loadVertexInfoJSONList(this, "sample_vertex_info.json");
+
+        int index = 0;
+
+        while (index < zooDataItemsNotInDatabaseList.size()) {
+            if (zooDataItemsNotInDatabaseList.get(index).kind == ZooData.VertexInfo.Kind.INTERSECTION ||
+                    zooDataItemsNotInDatabaseList.get(index).kind == ZooData.VertexInfo.Kind.GATE) {
+                zooDataItemsNotInDatabaseList.remove(index);
+            }
+            else {
+                index++;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         adapter = new SearchBarAdapter();
         adapter.setHasStableIds(true);
 
