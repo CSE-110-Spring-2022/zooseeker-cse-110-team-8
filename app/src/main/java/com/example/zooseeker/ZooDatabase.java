@@ -1,14 +1,12 @@
 package com.example.zooseeker;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
@@ -46,7 +44,7 @@ public abstract class ZooDatabase extends RoomDatabase {
                         super.onCreate(db);
                         Executors.newSingleThreadExecutor().execute(()->{
                             List<ZooData.VertexInfo> items = ZooData
-                                    .loadVertexInfoJSONList(context,"sample_node_info.json");
+                                    .loadVertexInfoJSONList(context, "sample_vertex_info.json");
                             getSingleton(context).SearchBarDAO().insertAll(items);
                         });
                     }

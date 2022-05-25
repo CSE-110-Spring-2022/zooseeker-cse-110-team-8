@@ -25,14 +25,14 @@ public class PlanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
-    //    Map<String, ZooData.VertexInfo> vInfo = ZooData.loadVertexInfoJSON("app/src/main/assets/sample_node_info.json");
+    //    Map<String, ZooData.VertexInfo> vInfo = ZooData.loadVertexInfoJSON("app/src/main/assets/sample_vertex_info.json");
         adapter = new SearchBarAdapter();
         adapter.setHasStableIds(true);
 
 
 
         Intent i = getIntent();
-      //  List<ZooData.VertexInfo> zooDataVertex = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
+      //  List<ZooData.VertexInfo> zooDataVertex = ZooData.loadVertexInfoJSON(this,"sample_vertex_info.json");
         List<ZooData.VertexInfo> selected_exhibits = (List<ZooData.VertexInfo>)i.getSerializableExtra("selected");
         recyclerView = findViewById(R.id.search_results_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
