@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 public class SearchBarActivity extends AppCompatActivity {
     public static final String s_exhibit = "com.example.zooseeker.s_exhibit";
+    SearchBarDAO searchBarDAO;
     private ZooDataViewModel zooDataViewModel;
     public RecyclerView recyclerView;
     public SearchBarAdapter adapter;
@@ -26,11 +27,9 @@ public class SearchBarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_bar);
 
 
-        SearchBarDAO searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
+        searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
         List<ZooData.VertexInfo> plan = searchBarDAO.getAll();
-
-        Map<String, ZooData.VertexInfo> zooDataItemsNotInDatabaseMap = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
-        List<ZooData.VertexInfo> zooDataItemsNotInDatabaseList = ZooData.loadVertexInfoJSONList(this,"sample_node_info.json");
+        List<ZooData.VertexInfo> zooDataItemsNotInDatabase = ZooData.loadVertexInfoJSONList(this,"sample_vertex_info.json");
         adapter = new SearchBarAdapter();
         adapter.setHasStableIds(true);
 
@@ -38,7 +37,8 @@ public class SearchBarActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        adapter.setSearchResults(zooDataItemsNotInDatabaseList);
+        adapter.setSearchResults(zooDataItemsNotInDatabase);
+
 
 /*
         zooDataViewModel = new ViewModelProvider(this).get(ZooDataViewModel.class);
@@ -52,18 +52,14 @@ public class SearchBarActivity extends AppCompatActivity {
         String start = "entrance_exit_gate";
         String goal = "elephant_odyssey";
         String pa= "sample_zoo_graph.json";
-
         1. Load the graph...
         Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON("sample_zoo_graph.json");
         GraphPath<String, IdentifiedWeightedEdge> currentpath = DijkstraShortestPath.findPathBetween(g, start, goal);
         currentpath.getWeight();
-
         2. Load the information about our nodes and edges...
-        Map<String, ZooData.VertexInfo> vInfoMap = ZooData.loadVertexInfoJSON(this,"sample_vertex_info.json");
+        Map<String, ZooData.VertexInfo> vInfoMap = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
         Map<String, ZooData.VertexInfo> eInfoMap = ZooData.loadEdgeInfoJSON(this,"sample_edge_info.json");
-
         System.out.printf("The shortest path from '%s' to '%s' is:\n", start, goal);
-
         int i = 1;
         for (IdentifiedWeightedEdge e : currentpath.getEdgeList()) {
             System.out.printf("  %d. Walk %.0f meters along %s from '%s' to '%s'.\n",
@@ -76,13 +72,45 @@ public class SearchBarActivity extends AppCompatActivity {
         }
 */
 
+//        String start = "entrance_exit_gate";
+//        String goal = "elephant_odyssey";
+//        String pa= "sample_zoo_graph.json";
+//
+//        // 1. Load the graph...
+//          Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON("sample_zoo_graph.json");
+//          GraphPath<String, IdentifiedWeightedEdge> currentpath = DijkstraShortestPath.findPathBetween(g, start, goal);
+//          currentpath.getWeight();
+//
+//        // 2. Load the information about our nodes and edges...
+//          List<ZooData.VertexInfo> vInfo = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
+//          List<ZooData.EdgeInfo> eInfo = ZooData.loadEdgeInfoJSON(this,"sample_edge_info.json");
+//        List<ZooData.VertexInfo> selected =
+
+//
+//        System.out.printf("The shortest path from '%s' to '%s' is:\n", start, goal);
+//
+//        int i = 1;
+
+        //for (IdentifiedWeightedEdge e : currentpath.getEdgeList()) {
+        //    System.out.printf("  %d. Walk %.0f meters along %s from '%s' to '%s'.\n",
+//                    i,
+//                      g.getEdgeWeight(e),
+//                      eInfo.get(e.getId()).street,
+//                      vInfo.get(g.getEdgeSource(e).toString()).name,
+//                      vInfo.get(g.getEdgeTarget(e).toString()).name);
+//            i++;
+        //}
     }
 
     public void onPlanClicked(View view)
     {
-        List<ZooData.VertexInfo> selected = adapter.getAll();
         Intent intent = new Intent(this,PlanActivity.class);
-        intent.putExtra("selected", (Serializable) selected);
+        List<ZooData.VertexInfo> selected = adapter.getAll();
+        for(ZooData.VertexInfo x: selected)
+        {
+            searchBarDAO.insert(x);
+        }
+//        intent.putExtra("selected", (Serializable) selected);
         startActivity(intent);
     }
 
@@ -108,8 +136,12 @@ public class SearchBarActivity extends AppCompatActivity {
 
     public void onAddClicked(View view) {
         List<ZooData.VertexInfo> selected = adapter.getAll();
+        for(ZooData.VertexInfo x: selected)
+        {
+            searchBarDAO.insert(x);
+        }
         Intent intent = new Intent(this,PlanActivity.class);
-        intent.putExtra("selected", (Serializable) selected);
+        // intent.putExtra("selected", (Serializable) selected);
         startActivity(intent);
     }
 }
