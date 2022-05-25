@@ -2,24 +2,14 @@ package com.example.zooseeker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-import org.jgrapht.Graph;
-import org.jgrapht.GraphPath;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
 import java.io.Serializable;
 import java.util.List;
@@ -38,7 +28,8 @@ public class SearchBarActivity extends AppCompatActivity {
 
         SearchBarDAO searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
         List<ZooData.VertexInfo> plan = searchBarDAO.getAll();
-       // Map<String, ZooData.VertexInfo> zooDataItemsNotInDatabaseMap = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
+
+        Map<String, ZooData.VertexInfo> zooDataItemsNotInDatabaseMap = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
         List<ZooData.VertexInfo> zooDataItemsNotInDatabaseList = ZooData.loadVertexInfoJSONList(this,"sample_node_info.json");
         adapter = new SearchBarAdapter();
         adapter.setHasStableIds(true);
@@ -68,7 +59,7 @@ public class SearchBarActivity extends AppCompatActivity {
         currentpath.getWeight();
 
         2. Load the information about our nodes and edges...
-        Map<String, ZooData.VertexInfo> vInfoMap = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
+        Map<String, ZooData.VertexInfo> vInfoMap = ZooData.loadVertexInfoJSON(this,"sample_vertex_info.json");
         Map<String, ZooData.VertexInfo> eInfoMap = ZooData.loadEdgeInfoJSON(this,"sample_edge_info.json");
 
         System.out.printf("The shortest path from '%s' to '%s' is:\n", start, goal);

@@ -68,9 +68,9 @@ public class ZooDatabasetest {
         tags1.add("bird");
         tags2.add("otter");
         tags2.add("mammal");
-        ZooData.VertexInfo item1 = new ZooData.VertexInfo("penguins",kind,tags1);
-        ZooData.VertexInfo item2 = new ZooData.VertexInfo("otters", kind, tags2);
-        ZooData.VertexInfo item3 = new ZooData.VertexInfo("otters", kind, tags2);
+        ZooData.VertexInfo item1 = new ZooData.VertexInfo("penguins", "penguins",kind,tags1);
+        ZooData.VertexInfo item2 = new ZooData.VertexInfo("otters1", "otters", kind, tags2);
+        ZooData.VertexInfo item3 = new ZooData.VertexInfo("otters2", "otters", kind, tags2);
 
         long id1 = dao.insert(item1);
         long id2 = dao.insert(item2);
@@ -82,7 +82,7 @@ public class ZooDatabasetest {
         tags1.add("penguin");
         tags1.add("bird");
         ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
-        ZooData.VertexInfo insertedData = new ZooData.VertexInfo("penguins", kind, tags1);
+        ZooData.VertexInfo insertedData = new ZooData.VertexInfo("penguins", "penguins", kind, tags1);
         long id = dao.insert(insertedData);
 
         ZooData.VertexInfo item = dao.get(id);
@@ -97,7 +97,7 @@ public class ZooDatabasetest {
         tags1.add("penguin");
         tags1.add("bird");
         ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
-        ZooData.VertexInfo item = new ZooData.VertexInfo("penguins", kind, tags1);
+        ZooData.VertexInfo item = new ZooData.VertexInfo("penguins", "penguins", kind, tags1);
         long id = dao.insert(item);
         item = dao.get(id);
         item.name = "penguins";
@@ -114,7 +114,7 @@ public class ZooDatabasetest {
         tags1.add("penguin");
         tags1.add("bird");
         ZooData.VertexInfo.Kind kind = ZooData.VertexInfo.Kind.EXHIBIT;
-        ZooData.VertexInfo item = new ZooData.VertexInfo("penguins", kind, tags1);
+        ZooData.VertexInfo item = new ZooData.VertexInfo("penguins" ,"penguins", kind, tags1);
         long id = dao.insert(item);
         item = dao.get(id);
         int itemsDeleted = dao.delete(item);

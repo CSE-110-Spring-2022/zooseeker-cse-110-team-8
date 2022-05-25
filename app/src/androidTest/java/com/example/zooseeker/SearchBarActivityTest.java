@@ -4,20 +4,17 @@ package com.example.zooseeker;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.w3c.dom.Text;
 
 import static org.junit.Assert.*;
 
@@ -45,7 +42,7 @@ public class SearchBarActivityTest{
                 .allowMainThreadQueries()
                 .build();
         ZooDatabase.injectTestDatabase(testDb);
-        List<ZooData.VertexInfo> todos = ZooData.loadVertexInfoJSONList(context, "sample_node_info.json");
+        List<ZooData.VertexInfo> todos = ZooData.loadVertexInfoJSONList(context, "sample_vertex_info.json");
         searchBarDAO = testDb.SearchBarDAO();
         searchBarDAO.insertAll(todos);
     }

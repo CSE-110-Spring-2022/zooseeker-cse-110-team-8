@@ -40,21 +40,24 @@ public class ZooData {
         public static enum Kind {
             // The SerializedName annotation tells GSON how to convert
             // from the strings in our JSON to this Enum.
+            @SerializedName("id") ID,
             @SerializedName("gate") GATE,
             @SerializedName("exhibit") EXHIBIT,
             @SerializedName("intersection") INTERSECTION
 
         }
 
-        @PrimaryKey(autoGenerate = true)
-        public long id;
+        @PrimaryKey
+        @NonNull
+        public String id;
 
         @NonNull
         public String name;
         public Kind kind;
         public List<String> tags;
 
-        VertexInfo(@NonNull String name, Kind kind, List<String> tags) {
+        VertexInfo(@NonNull String id, String name, Kind kind, List<String> tags) {
+            this.id = id;
             this.name = name;
             this.kind = kind;
             this.tags = tags;
@@ -76,56 +79,63 @@ public class ZooData {
         public String street;
     }
 
-    //public static Map<String, ZooData.VertexInfo> loadVertexInfoJSON(String path) {
-      //  InputStream inputStream = App.class.getClassLoader().getResourceAsStream(path);
-     //   Reader reader = new InputStreamReader(inputStream);
-
-     //   Gson gson = new Gson();
-     //   Type type = new TypeToken<List<ZooData.VertexInfo>>(){}.getType();
-      //  List<ZooData.VertexInfo> zooData = gson.fromJson(reader, type);
-
-        // This code is equivalent to:
-
-        // Map<String, ZooData.VertexInfo> indexedZooData = new HashMap();
-        // for (ZooData.VertexInfo datum : zooData) {
-        // indexedZooData[datum.id] = datum;
-        // }
-
-      //  Map<String, ZooData.VertexInfo> indexedZooData = zooData
-       //         .stream()
-      //          .collect(Collectors.toMap(v -> v.id, datum -> datum));
-
-      //  return indexedZooData;
-  //  }
-
     public static Map<String, ZooData.VertexInfo> loadVertexInfoJSON(Context context, String path) {
+//        InputStream inputStream = App.class.getClassLoader().getResourceAsStream(path);
         InputStream inputStream = null;
+        Reader reader = null;
         try {
             inputStream = context.getAssets().open(path);
+            reader = new InputStreamReader(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Reader reader = new InputStreamReader(inputStream);
 
         Gson gson = new Gson();
         Type type = new TypeToken<List<ZooData.VertexInfo>>(){}.getType();
         List<ZooData.VertexInfo> zooData = gson.fromJson(reader, type);
 
-        // This code is equivalent to:
-        //
-        // Map<String, ZooData.VertexInfo> indexedZooData = new HashMap();
-        // for (ZooData.VertexInfo datum : zooData) {
-        //   indexedZooData[datum.id] = datum;
-        // }
-        //
+         //This code is equivalent to:
+
+//         Map<String, ZooData.VertexInfo> indexedZooData = new HashMap();
+//         for (ZooData.VertexInfo datum : zooData) {
+//         indexedZooData[datum.id] = datum;
+//         }
 
         Map<String, ZooData.VertexInfo> indexedZooData = zooData
                 .stream()
-                .collect(Collectors.toMap(v -> String.valueOf(v.id), datum -> datum));
+                .collect(Collectors.toMap(v -> v.id, datum -> datum));
 
         return indexedZooData;
     }
+
+//    public static Map<String, ZooData.VertexInfo> loadVertexInfoJSON(Context context, String path) {
+//        InputStream inputStream = null;
+//        try {
+//            inputStream = context.getAssets().open(path);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Reader reader = new InputStreamReader(inputStream);
+//
+//        Gson gson = new Gson();
+//        Type type = new TypeToken<List<ZooData.VertexInfo>>(){}.getType();
+//        List<ZooData.VertexInfo> zooData = gson.fromJson(reader, type);
+//
+//        // This code is equivalent to:
+//        //
+//        // Map<String, ZooData.VertexInfo> indexedZooData = new HashMap();
+//        // for (ZooData.VertexInfo datum : zooData) {
+//        //   indexedZooData[datum.id] = datum;
+//        // }
+//        //
+//
+//        Map<String, ZooData.VertexInfo> indexedZooData = zooData
+//                .stream()
+//                .collect(Collectors.toMap(v -> String.valueOf(v.id), datum -> datum));
+//
+//        return indexedZooData;
+//    }
 
     public static List<ZooData.VertexInfo> loadVertexInfoJSONList(Context context, String path) {
         InputStream inputStream = null;
