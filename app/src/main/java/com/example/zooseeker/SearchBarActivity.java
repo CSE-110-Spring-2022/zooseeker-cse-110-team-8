@@ -38,7 +38,7 @@ public class SearchBarActivity extends AppCompatActivity {
 
         SearchBarDAO searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
         List<ZooData.VertexInfo> plan = searchBarDAO.getAll();
-        Map<String, ZooData.VertexInfo> zooDataItemsNotInDatabaseMap = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
+       // Map<String, ZooData.VertexInfo> zooDataItemsNotInDatabaseMap = ZooData.loadVertexInfoJSON(this,"sample_node_info.json");
         List<ZooData.VertexInfo> zooDataItemsNotInDatabaseList = ZooData.loadVertexInfoJSONList(this,"sample_node_info.json");
         adapter = new SearchBarAdapter();
         adapter.setHasStableIds(true);
