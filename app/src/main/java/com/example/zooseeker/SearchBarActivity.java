@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 public class SearchBarActivity extends AppCompatActivity {
@@ -21,6 +23,10 @@ public class SearchBarActivity extends AppCompatActivity {
     public RecyclerView recyclerView;
     public SearchBarAdapter adapter;
 
+    public List<ZooData.VertexInfo> plan;
+    public Map<String, ZooData.VertexInfo> zooDataItemsNotInDatabaseMap;
+    public List<ZooData.VertexInfo> zooDataItemsNotInDatabaseList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +34,15 @@ public class SearchBarActivity extends AppCompatActivity {
 
 
         searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
-        List<ZooData.VertexInfo> plan = searchBarDAO.getAll();
 
-        Map<String, ZooData.VertexInfo> zooDataItemsNotInDatabaseMap = ZooData.loadVertexInfoJSON(this, "sample_vertex_info.json");
-        List<ZooData.VertexInfo> zooDataItemsNotInDatabaseList = ZooData.loadVertexInfoJSONList(this, "sample_vertex_info.json");
+        zooDataItemsNotInDatabaseMap = ZooData.loadVertexInfoJSON(this, "sample_vertex_info.json");
+        zooDataItemsNotInDatabaseList = ZooData.loadVertexInfoJSONList(this, "sample_vertex_info.json");
+        try {
+            List<ZooData.VertexInfo> plan = searchBarDAO.getAll();
+        }
+        catch (Exception e) {
+            List<ZooData.VertexInfo> plan = Collections.emptyList();
+        }
 
         int index = 0;
 
@@ -121,13 +132,30 @@ public class SearchBarActivity extends AppCompatActivity {
     public void onPlanClicked(View view)
     {
         Intent intent = new Intent(this,PlanActivity.class);
-        List<ZooData.VertexInfo> selected = adapter.getAll();
-        for(ZooData.VertexInfo x: selected)
+        List<ZooData.VertexInfo> exhibits = adapter.getAll();
+        for(ZooData.VertexInfo x: exhibits)
         {
-            searchBarDAO.insert(x);
+            if (plan.contains(x)) {
+                searchBarDAO.insert(x);
+            }
         }
 //        intent.putExtra("selected", (Serializable) selected);
         startActivity(intent);
+    }
+
+    public void onCheckboxClicked(View view)
+    {
+        boolean checked = ((CheckBox) view).isChecked();
+        if (checked) {
+            if (!(zooDataItemsNotInDatabaseList.contains(zooDataItemsNotInDatabaseList.get(view.getId())))) {
+                plan.add(0, zooDataItemsNotInDatabaseList.get(view.getId()));
+            }
+        }
+        else {
+            if (zooDataItemsNotInDatabaseList.contains(zooDataItemsNotInDatabaseList.get(view.getId()))) {
+                plan.remove(plan.indexOf(zooDataItemsNotInDatabaseList.get(view.getId())));
+            }
+        }
     }
 
     @Override
@@ -149,15 +177,14 @@ public class SearchBarActivity extends AppCompatActivity {
         });
         return super.onCreateOptionsMenu(menu);
     }
-
+/*
     public void onAddClicked(View view) {
         List<ZooData.VertexInfo> selected = adapter.getAll();
-        for(ZooData.VertexInfo x: selected)
-        {
+        for(ZooData.VertexInfo x: selected) {
             searchBarDAO.insert(x);
         }
         Intent intent = new Intent(this,PlanActivity.class);
         // intent.putExtra("selected", (Serializable) selected);
         startActivity(intent);
-    }
+    }*/
 }

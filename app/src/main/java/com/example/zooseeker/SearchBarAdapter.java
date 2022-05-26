@@ -103,7 +103,7 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
             super(itemView);
             this.textViewTitle = itemView.findViewById(R.id.search_result_title);
             this.textViewTags = itemView.findViewById(R.id.search_view_tags);
-            this.checkBox_complete = itemView.findViewById(R.id.check_box);
+            this.checkBox_complete = itemView.findViewById(R.id.search_result_title);
 
             checkBox_complete.setOnClickListener(new View.OnClickListener(){
                 @Override
