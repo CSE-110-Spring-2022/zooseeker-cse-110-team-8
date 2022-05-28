@@ -56,4 +56,10 @@ public class PlanActivity extends AppCompatActivity {
         Intent intent = new Intent( this, RouteActivity.class);
         startActivity(intent);
     }
+
+    public void onClearClicked(View view) {
+        searchBarDAO.deleteAllZooData();
+        List<ZooData.VertexInfo> selected_exhibits = searchBarDAO.getAll();
+        adapter.setSearchResults(selected_exhibits);
+    }
 }
