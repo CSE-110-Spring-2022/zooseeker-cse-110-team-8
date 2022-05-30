@@ -208,7 +208,7 @@ public class ZooData {
         return zooData;
     }
 
-    public static Graph<String, IdentifiedWeightedEdge> loadZooGraphJSON(String path) {
+    public static Graph<String, IdentifiedWeightedEdge> loadZooGraphJSON(Context context, String path) {
         // Create an empty graph to populate.
         Graph<String, IdentifiedWeightedEdge> g = new DefaultUndirectedWeightedGraph<>(IdentifiedWeightedEdge.class);
 
@@ -236,8 +236,10 @@ public class ZooData {
         File initialFile = new File(path);
         InputStream inputStream = null;
         try {
-            inputStream = new FileInputStream(initialFile);
-        } catch (FileNotFoundException e) {
+            inputStream = context.getAssets().open(path);
+            //FileInputStream(initialFile)
+        }
+         catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -247,5 +249,7 @@ public class ZooData {
         importer.importGraph(g, reader);
 
         return g;
+
+
     }
 }

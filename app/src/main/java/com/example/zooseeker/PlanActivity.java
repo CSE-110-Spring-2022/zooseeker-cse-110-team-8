@@ -14,6 +14,7 @@ import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.alg.shortestpath.BellmanFordShortestPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,13 +54,59 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     public void onRouteClicked(View view) {
-        Intent intent = new Intent( this, RouteActivity.class);
-        startActivity(intent);
+      //  Intent intent = new Intent( this, RouteActivity.class);
+        double lowest_weight= 9999;
+        String lowest_path="entrance_exit_gate";
+
+        List<String> selected_exhibits = searchBarDAO.getAllid();
+        String currentlocation="entrance_exit_gate";
+        Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON(this,"sample_zoo_graph.json");
+        Map<String, ZooData.VertexInfo> vInfo = ZooData.loadVertexInfoJSON(this,"sample_vertex_info.json");
+        Map<String, ZooData.EdgeInfo> eInfo = ZooData.loadEdgeInfoJSON(this,"sample_edge_info.json");
+
+        Map<String,Boolean> m = new HashMap<String, Boolean>();
+        for(int i=0;i<selected_exhibits.size();i++){
+            m.put(selected_exhibits.get(i),Boolean.TRUE);
+        }
+
+        for(int i=0;i<selected_exhibits.)
+            for(int i=0;i<selected_exhibits.size();i++){
+
+                //if True
+                if(m.containsKey(selected_exhibits.get(i))) {
+                    GraphPath<String, IdentifiedWeightedEdge> currentpath = DijkstraShortestPath.findPathBetween(g, currentlocation, selected_exhibits.get(i));
+
+                    //get min
+                    if (lowest_weight > currentpath.getWeight()) {
+                        lowest_weight = currentpath.getWeight();
+                        lowest_path = selected_exhibits.get(i);
+                    }
+
+                }
+            }
+            //  m.remove()
+            m.put(lowest_path,Boolean.FALSE);
+            currentlocation=lowest_path;
+            int j = 1;
+
+            for (IdentifiedWeightedEdge e : currentpath.getEdgeList()) {
+                System.out.printf("  %d. Walk %.0f meters along %s from '%s' to '%s'.\n",
+                        j,
+                        g.getEdgeWeight(e),
+                        eInfo.get(e.getId()).street,
+                        vInfo.get(g.getEdgeSource(e).toString()).name,
+                        vInfo.get(g.getEdgeTarget(e).toString()).name);
+                j++;
+            }
+
+    //adapter.setSearchResults();
+     //   startActivity(intent);
     }
 
     public void onClearClicked(View view) {
         searchBarDAO.deleteAllZooData();
         List<ZooData.VertexInfo> selected_exhibits = searchBarDAO.getAll();
         adapter.setSearchResults(selected_exhibits);
+
     }
 }

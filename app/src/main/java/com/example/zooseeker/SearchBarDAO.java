@@ -26,6 +26,15 @@ public interface SearchBarDAO {
     @Query("SELECT * FROM `search_result` ORDER BY `id`" )
     List<ZooData.VertexInfo> getAll();
 
+
+    //test
+    @Query("SELECT `id` FROM `search_result`" )
+    List<String> getAllid();
+
+
+
+
+
     @Query("DELETE FROM `search_result`")
     void deleteAllZooData();
 

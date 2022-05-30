@@ -1,5 +1,6 @@
 package com.example.zooseeker;
 
+import java.util.List;
 import java.util.Map;
 
 import org.jgrapht.Graph;
@@ -7,7 +8,23 @@ import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
 public class App {
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
+
+//        Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON("app/src/main/assets/sample_zoo_graph.json");
+//        GraphPath<String, IdentifiedWeightedEdge> path =
+//                            DijkstraShortestPath.findPathBetween(g, "intxn_front_treetops", "flamingo");
+
+
+      //  int index=0;
+       //  while(index<path.getEdgeList().size()){
+        //   System.out.println(path.getEdgeList().toString());
+          //  index++;
+     //   }
+       // path.getEdgeList();
+//
+//        System.out.println("weight: "+path.getWeight());
+       // path.getWeight();
+
 //        // "source" and "sink" are graph terms for the start and end
 //        String start = "entrance_exit_gate";
 //        String goal = "elephant_odyssey";
@@ -35,5 +52,5 @@ public class App {
 //        }
 //
 //        Search.displaySearchResult("mammal");
-//    }
+   }
 }
