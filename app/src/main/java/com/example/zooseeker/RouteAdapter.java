@@ -10,18 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jgrapht.GraphPath;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> {
     private List<ZooData.VertexInfo> RouteSummary = Collections.emptyList();
+    private List<Double> distance_list = new ArrayList<>();
     private List<GraphPath<String, IdentifiedWeightedEdge>> Route_list = Collections.emptyList();
 
-    public void setRoutes(List<ZooData.VertexInfo> newRouteSummary, List<GraphPath<String, IdentifiedWeightedEdge>> new_Route_list)
+    public void setRoutes(List<ZooData.VertexInfo> newRouteSummary, List<GraphPath<String, IdentifiedWeightedEdge>> new_Route_list, List<Double> newDistance)
     {
         this.RouteSummary.clear();
         this.RouteSummary = newRouteSummary;
         this.Route_list = new_Route_list;
+        this.distance_list = newDistance;
         notifyDataSetChanged();
     }
 
@@ -38,7 +41,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RouteAdapter.ViewHolder holder, int position) {
-        holder.setZooData(RouteSummary.get(position), Route_list.get(position));
+        holder.setZooData(RouteSummary.get(position), distance_list.get(position));
     }
 
     @Override
@@ -60,11 +63,10 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
         }
         public ZooData.VertexInfo getZooData() {return zooData;}
 
-        public void setZooData(ZooData.VertexInfo zooData, GraphPath<String, IdentifiedWeightedEdge> path ) {
+        public void setZooData(ZooData.VertexInfo zooData, Double distant ) {
             this.zooData = zooData;
             this.title.setText(zooData.name);
-            int dis = (int) path.getWeight();
-            String d = dis + " meters";
+            String d = distant + " meters";
             this.distance.setText(d);
         }
 

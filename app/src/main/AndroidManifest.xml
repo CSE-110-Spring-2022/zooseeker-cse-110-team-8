@@ -15,10 +15,8 @@
             android:exported="false" />
         <activity
             android:name=".RouteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Route"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PlanActivity" />
         <activity
             android:name=".SearchBarActivity"
             android:exported="false" />
