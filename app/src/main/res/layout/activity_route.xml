@@ -7,8 +7,21 @@
 
     tools:context=".RouteActivity">
 
+    <TextView
+        android:id="@+id/Route_summary"
+        android:layout_width="224dp"
+        android:layout_height="45dp"
 
+        android:minHeight="48dp"
+        android:text="Route Summary"
+        android:textSize="24sp"
 
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.036" />
 
     <Button
         android:id="@+id/direction_button"
@@ -22,31 +35,28 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921" />
+        app:layout_constraintVertical_bias="0.985" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/route_recyclerview"
         android:layout_width="407dp"
         android:layout_height="600dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/search_result" />
+        app:layout_constraintVertical_bias="0.465"
+        tools:listitem="@layout/route_result" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="44dp"
         android:text="Current Direction: "
         app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
 
-        app:layout_constraintStart_toStartOf="parent" />
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
