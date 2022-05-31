@@ -119,7 +119,6 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
                 }
             });
         }
-
         public ZooData.VertexInfo getZooData() {return zooData;}
 
         public void setZooData(ZooData.VertexInfo zooData) {
