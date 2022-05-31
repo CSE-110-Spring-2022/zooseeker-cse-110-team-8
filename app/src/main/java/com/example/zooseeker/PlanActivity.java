@@ -53,8 +53,11 @@ public class PlanActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+//   Getting Shortest path when Route button get clicked
     public void onRouteClicked(View view) {
       //  Intent intent = new Intent( this, RouteActivity.class);
+
         double lowest_weight= 9999;
         String lowest_path="entrance_exit_gate";
 
@@ -64,17 +67,22 @@ public class PlanActivity extends AppCompatActivity {
         Map<String, ZooData.VertexInfo> vInfo = ZooData.loadVertexInfoJSON(this,"sample_vertex_info.json");
         Map<String, ZooData.EdgeInfo> eInfo = ZooData.loadEdgeInfoJSON(this,"sample_edge_info.json");
 
-        Map<String,Boolean> m = new HashMap<String, Boolean>();
+        //push all Plan Vertex id into map,
+        // so we can use it to select shortest path from
+        // current_location
+        HashMap<String,Boolean> m = new HashMap<String, Boolean>();
         for(int i=0;i<selected_exhibits.size();i++){
             m.put(selected_exhibits.get(i),Boolean.TRUE);
         }
 
-        for(int i=0;i<selected_exhibits.)
+
+        for(int k=0;k<selected_exhibits.size();k++){
+            GraphPath<String, IdentifiedWeightedEdge> currentpath;
             for(int i=0;i<selected_exhibits.size();i++){
 
-                //if True
+                //if True we
                 if(m.containsKey(selected_exhibits.get(i))) {
-                    GraphPath<String, IdentifiedWeightedEdge> currentpath = DijkstraShortestPath.findPathBetween(g, currentlocation, selected_exhibits.get(i));
+                    currentpath = DijkstraShortestPath.findPathBetween(g, currentlocation, selected_exhibits.get(i));
 
                     //get min
                     if (lowest_weight > currentpath.getWeight()) {
@@ -83,10 +91,22 @@ public class PlanActivity extends AppCompatActivity {
                     }
 
                 }
+
             }
-            //  m.remove()
-            m.put(lowest_path,Boolean.FALSE);
+            m.remove(lowest_path);
+
+
+
+            //go from current -> dest
+            currentpath = DijkstraShortestPath.findPathBetween(g, currentlocation, lowest_path);
+            System.out.println("weight: "+ currentpath.getWeight());
+            System.out.println("now i am going from  "+ currentlocation+  " to: "+ lowest_path);
+
             currentlocation=lowest_path;
+            lowest_weight=9999;
+
+
+
             int j = 1;
 
             for (IdentifiedWeightedEdge e : currentpath.getEdgeList()) {
@@ -98,6 +118,8 @@ public class PlanActivity extends AppCompatActivity {
                         vInfo.get(g.getEdgeTarget(e).toString()).name);
                 j++;
             }
+        }
+
 
     //adapter.setSearchResults();
      //   startActivity(intent);
