@@ -57,6 +57,10 @@ public class PlanActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /*
+     * clear the selected exhibit in the database and update the adapter with
+     * empty selected exhibit.
+     */
     public void onClearClicked(View view) {
         searchBarDAO.deleteAllZooData();
         List<ZooData.VertexInfo> selected_exhibits = searchBarDAO.getAll();
