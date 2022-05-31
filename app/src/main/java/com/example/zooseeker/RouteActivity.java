@@ -31,7 +31,7 @@ public class RouteActivity extends AppCompatActivity {
         adapter = new RouteAdapter();
         adapter.setHasStableIds(true);
         List<GraphPath<String, IdentifiedWeightedEdge>> Sorted_routes = new ArrayList<>();
-
+        List<Double> distance = new ArrayList<>();
 
 
 
@@ -47,6 +47,7 @@ public class RouteActivity extends AppCompatActivity {
         GraphPath<String, IdentifiedWeightedEdge> low_path;
         ZooData.VertexInfo low_exhibit = null;
         List<ZooData.VertexInfo> Sorted_exhibits = new ArrayList<>();
+        double route_distance = 0;
         // push all Plan Vertex id into map,
         // so we can use it to select shortest path from
         // current_location
@@ -79,7 +80,11 @@ public class RouteActivity extends AppCompatActivity {
 
             //go from current -> dest
             currentpath = DijkstraShortestPath.findPathBetween(g, currentlocation, lowest_path);
+
             Sorted_routes.add(currentpath);
+            route_distance += currentpath.getWeight();
+            distance.add(route_distance);
+
             Sorted_exhibits.add(low_exhibit);
             System.out.println("weight: "+ currentpath.getWeight());
             System.out.println("now i am going from  "+ currentlocation+  " to: "+ lowest_path);
@@ -89,11 +94,12 @@ public class RouteActivity extends AppCompatActivity {
             int j = 1;
         }
 
+
         recyclerView = findViewById(R.id.route_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        adapter.setRoutes(Sorted_exhibits,Sorted_routes);
+        adapter.setRoutes(Sorted_exhibits,Sorted_routes,distance);
         //  disPlayRoute();
 
         //Trail code of activity
