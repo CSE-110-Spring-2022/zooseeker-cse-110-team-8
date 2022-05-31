@@ -33,6 +33,7 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
         notifyDataSetChanged();
     }
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
