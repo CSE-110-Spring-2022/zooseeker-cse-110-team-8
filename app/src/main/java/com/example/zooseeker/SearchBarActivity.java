@@ -11,6 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.jgrapht.Graph;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +58,7 @@ public class SearchBarActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         adapter.setSearchResults(zooDataItemsNotInDatabaseList);
+
 
 
 /*
