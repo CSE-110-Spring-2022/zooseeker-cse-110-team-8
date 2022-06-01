@@ -12,7 +12,9 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".DirectionActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".RouteActivity"
+            />
         <activity
             android:name=".RouteActivity"
             android:exported="false"

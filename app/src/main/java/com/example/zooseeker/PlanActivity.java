@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
@@ -24,6 +25,7 @@ public class PlanActivity extends AppCompatActivity {
     private ZooDataViewModel zooDataViewModel;
     SearchBarDAO searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
     public RecyclerView recyclerView;
+    public TextView text;
     public SearchBarAdapter adapter;
 
     @Override
@@ -43,7 +45,11 @@ public class PlanActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.search_results_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        text = findViewById(R.id.total_exhibit_count);
+        String size = String.valueOf(selected_exhibits.size());
+        text.setText(size);
         adapter.setSearchResults(selected_exhibits);
+
     }
 
 
@@ -52,6 +58,7 @@ public class PlanActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, SearchBarActivity.class);
         startActivity(intent);
+
     }
 
 
@@ -69,6 +76,7 @@ public class PlanActivity extends AppCompatActivity {
         searchBarDAO.deleteAllZooData();
         List<ZooData.VertexInfo> selected_exhibits = searchBarDAO.getAll();
         adapter.setSearchResults(selected_exhibits);
-
+        String size = String.valueOf(selected_exhibits.size());
+        text.setText(size);
     }
 }

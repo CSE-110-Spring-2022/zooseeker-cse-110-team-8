@@ -48,6 +48,21 @@
         app:layout_constraintVertical_bias="0.465"
         tools:listitem="@layout/route_result" />
 
+
+    <Button
+        android:id="@+id/clear_route_button"
+        android:layout_width="134dp"
+        android:layout_height="53dp"
+        android:onClick="onClearRouteClicked"
+        android:text="Clear Route"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.007"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

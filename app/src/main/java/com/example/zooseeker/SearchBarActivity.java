@@ -126,11 +126,7 @@ public class SearchBarActivity extends AppCompatActivity {
     public void onPlanClicked(View view)
     {
         Intent intent = new Intent(this,PlanActivity.class);
-        List<ZooData.VertexInfo> selected = adapter.getAll();
-        for(ZooData.VertexInfo x: selected)
-        {
-            searchBarDAO.insert(x);
-        }
+
 //        intent.putExtra("selected", (Serializable) selected);
         startActivity(intent);
     }
