@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,12 +25,14 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
     private List<ZooData.VertexInfo> searchResults = Collections.emptyList();
     private List<ZooData.VertexInfo> searchResultsAll = Collections.emptyList();
     private List<ZooData.VertexInfo> selected_result = new ArrayList<>();
+    private Integer exhibit_count = 0;
 
 
     public void setSearchResults(List<ZooData.VertexInfo> newSearchResults) {
         this.searchResults.clear();
         this.searchResults = newSearchResults;
         this.searchResultsAll = new ArrayList<>(newSearchResults);
+        this.exhibit_count = selected_result.size();
 
         notifyDataSetChanged();
     }
@@ -99,12 +103,16 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
         private TextView textViewTags;
         private CheckBox checkBox_complete;
         private ZooData.VertexInfo zooData;
+        private TextView exhibit_count_text;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            //bind format of ui with corresponding template.
             this.textViewTitle = itemView.findViewById(R.id.search_result_title);
             this.textViewTags = itemView.findViewById(R.id.search_view_tags);
             this.checkBox_complete = itemView.findViewById(R.id.check_box);
+            this.exhibit_count_text = itemView.findViewById(R.id.total_exhibit_count);
+
 
             checkBox_complete.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -121,12 +129,17 @@ public class SearchBarAdapter extends RecyclerView.Adapter<SearchBarAdapter.View
         }
         public ZooData.VertexInfo getZooData() {return zooData;}
 
+        //binding data with ui
         public void setZooData(ZooData.VertexInfo zooData) {
             this.zooData = zooData;
             this.textViewTitle.setText(zooData.name);
             this.textViewTags
                     .setText(zooData.tags.toString()
                             .substring(1, zooData.tags.toString().length()-1));
+            if(exhibit_count == null)
+            {
+                exhibit_count = 0;
+            }
 
         }
 

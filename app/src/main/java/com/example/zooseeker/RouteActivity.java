@@ -21,6 +21,8 @@ import java.util.Map;
 public class RouteActivity extends AppCompatActivity {
     SearchBarDAO searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
     private ZooDataViewModel zooDataViewModel;
+    Plan currentPlan;
+    //PlanDAO planDAO = PlanDatabase.getSingleton(this).PlanDAO();
     public RecyclerView recyclerView;
     public RouteAdapter adapter;
 
@@ -55,6 +57,7 @@ public class RouteActivity extends AppCompatActivity {
         for(int i=0;i<selected_exhibits.size();i++){
             m.put(selected_exhibits.get(i).id,Boolean.TRUE);
         }
+
 
 
         for(int k=0;k<selected_exhibits.size();k++){
@@ -92,6 +95,17 @@ public class RouteActivity extends AppCompatActivity {
             lowest_weight=9999;
 
             int j = 1;
+
+
+            for (IdentifiedWeightedEdge e : currentpath.getEdgeList()) {
+                System.out.printf("  %d. Walk %.0f meters along %s from '%s' to '%s'.\n",
+                        j,
+                        g.getEdgeWeight(e),
+                        eInfo.get(e.getId()).street,
+                        vInfo.get(g.getEdgeSource(e).toString()).name,
+                        vInfo.get(g.getEdgeTarget(e).toString()).name);
+                j++;
+            }
         }
 
 
@@ -108,11 +122,15 @@ public class RouteActivity extends AppCompatActivity {
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setAdapter(adapter);
 
+        currentPlan = new Plan(Sorted_exhibits,Sorted_routes,distance, 0);
 
     }
 
     public void onDirectionClicked(View view) {
+
         Intent intent = new Intent( this, DirectionActivity.class);
+        intent.putExtra("current_plan", currentPlan);
+
         startActivity(intent);
     }
     public void disPlayRoute(){
@@ -133,4 +151,7 @@ public class RouteActivity extends AppCompatActivity {
 
     }
 
+    public void onClearRouteClicked(View view) {
+
+    }
 }

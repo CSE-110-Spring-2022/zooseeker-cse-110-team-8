@@ -4,16 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1375" />
-        <entry key="app/src/main/res/layout/activity_direction.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_direction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/layout/activity_plan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_plan_page.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/activity_route.xml" value="0.26732635498046875" />
         <entry key="app/src/main/res/layout/activity_search_bar.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_search_bar_page_acticvity.xml" value="0.25729166666666664" />
-        <entry key="app/src/main/res/layout/exhibit_list_item.xml" value="0.13779128672745694" />
+        <entry key="app/src/main/res/layout/direction_result.xml" value="0.25" />
         <entry key="app/src/main/res/layout/plan_page.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/plan_rv.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/plan_rv.xml" value="0.1" />
         <entry key="app/src/main/res/layout/route_result.xml" value="0.29592742919921877" />
         <entry key="app/src/main/res/layout/search_bar_page.xml" value="0.1" />
         <entry key="app/src/main/res/layout/search_result.xml" value="0.1" />

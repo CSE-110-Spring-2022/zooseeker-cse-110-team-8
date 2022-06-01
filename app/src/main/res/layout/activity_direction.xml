@@ -6,4 +6,106 @@
     android:layout_height="match_parent"
     tools:context=".DirectionActivity">
 
+    <TextView
+        android:id="@+id/Direction"
+        android:layout_width="224dp"
+        android:layout_height="45dp"
+
+        android:minHeight="48dp"
+        android:text="Direction"
+        android:textColor="#000000"
+
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.034" />
+
+    <TextView
+        android:id="@+id/from_to_exhibit"
+        android:layout_width="406dp"
+        android:layout_height="43dp"
+
+        android:minHeight="48dp"
+        android:text="from to exhibit"
+        android:textColor="#000000"
+
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <Button
+        android:id="@+id/previous_button"
+        android:layout_width="134dp"
+        android:layout_height="53dp"
+        android:onClick="onPreviousClicked"
+        android:text="Previous"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.994" />
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="134dp"
+        android:layout_height="53dp"
+        android:onClick="onNextClicked"
+        android:text="Next"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.994" />
+
+    <Button
+        android:id="@+id/detailed_button"
+        android:layout_width="134dp"
+        android:layout_height="53dp"
+        android:onClick="onDetailedClicked"
+        android:text="Detailed Direction"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <Button
+        android:id="@+id/bref_button"
+        android:layout_width="134dp"
+        android:layout_height="53dp"
+        android:onClick="onbrefClicked"
+        android:text="Bref Direction"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.974"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/direction_recyclerview"
+        android:layout_width="410dp"
+        android:layout_height="453dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428"
+        tools:listitem="@layout/direction_result" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
