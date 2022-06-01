@@ -17,15 +17,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/*
+ *
+ */
 public class DirectionActivity extends AppCompatActivity {
     SearchBarDAO searchBarDAO = ZooDatabase.getSingleton(this).SearchBarDAO();
     Plan currentPlan;
-//    PlanDAO planDAO = PlanDatabase.getSingleton(this).PlanDAO();
     private ZooDataViewModel zooDataViewModel;
     public RecyclerView recyclerView;
     public DirectionAdapter adapter;
     public TextView text;
 
+    /*
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

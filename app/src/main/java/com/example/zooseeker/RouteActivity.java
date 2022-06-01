@@ -32,11 +32,13 @@ public class RouteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_route);
         adapter = new RouteAdapter();
         adapter.setHasStableIds(true);
+
+        calculatePlan();
+    }
+
+    public void calculatePlan() {
         List<GraphPath<String, IdentifiedWeightedEdge>> Sorted_routes = new ArrayList<>();
         List<Double> distance = new ArrayList<>();
-
-
-
 
         double lowest_weight= 9999;
         String lowest_path="entrance_exit_gate";
@@ -122,7 +124,6 @@ public class RouteActivity extends AppCompatActivity {
 //        recyclerView.setAdapter(adapter);
 
         currentPlan = new Plan(Sorted_exhibits,Sorted_routes,distance, 0);
-
     }
 
     public void onDirectionClicked(View view) {
@@ -153,5 +154,10 @@ public class RouteActivity extends AppCompatActivity {
     public void onClearRouteClicked(View view) {
         Intent intent = new Intent( this, RouteActivity.class);
         startActivity(intent);
+    }
+
+    public void onReplanClicked(View view) {
+        //System.out.println("Replan clicked!");
+        calculatePlan();
     }
 }
