@@ -3,4 +3,5 @@
     <string name="plan" />
     <string name="back" />
     <string name="searchbar">searchBar</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
