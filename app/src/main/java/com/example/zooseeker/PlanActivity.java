@@ -65,6 +65,7 @@ public class PlanActivity extends AppCompatActivity {
 //   Getting Shortest path when Route button get clicked
     public void onRouteClicked(View view) {
       Intent intent = new Intent( this, RouteActivity.class);
+      intent.putExtra("clear_plan", false);
       startActivity(intent);
     }
 

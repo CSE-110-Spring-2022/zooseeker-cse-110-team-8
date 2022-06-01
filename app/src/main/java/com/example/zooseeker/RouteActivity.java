@@ -108,12 +108,11 @@ public class RouteActivity extends AppCompatActivity {
             }
         }
 
-
         recyclerView = findViewById(R.id.route_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
         adapter.setRoutes(Sorted_exhibits,Sorted_routes,distance);
+
         //  disPlayRoute();
 
         //Trail code of activity
@@ -152,6 +151,7 @@ public class RouteActivity extends AppCompatActivity {
     }
 
     public void onClearRouteClicked(View view) {
-
+        Intent intent = new Intent( this, RouteActivity.class);
+        startActivity(intent);
     }
 }
