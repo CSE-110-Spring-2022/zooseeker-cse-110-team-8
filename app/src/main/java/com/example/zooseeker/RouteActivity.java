@@ -154,4 +154,9 @@ public class RouteActivity extends AppCompatActivity {
         Intent intent = new Intent( this, RouteActivity.class);
         startActivity(intent);
     }
+
+    public void onMapClicked(View view) {
+        Intent intent = new Intent( this, MapsActivity.class);
+        startActivity(intent);
+    }
 }
